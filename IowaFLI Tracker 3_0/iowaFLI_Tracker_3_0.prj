@@ -1,0 +1,156 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="1830744258" file="R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0\iowaFLI_Tracker_3_0.prj" location="R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0" name="iowaFLI_Tracker_3_0" preferred-package-location="R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0\iowaFLI_Tracker_3_0\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>iowaFLI_Tracker</param.appname>
+    <param.icon>${PROJECT_ROOT}\iowaFLI_Tracker_3_0_resources\icon.ico</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0_resources\icon_32.png</file>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0_resources\icon_16.png</file>
+    </param.icons>
+    <param.version>3.0</param.version>
+    <param.authnamewatermark>Atulya Iyengar</param.authnamewatermark>
+    <param.email>atulya.iyengar@uiowa.edu</param.email>
+    <param.company>Wu Lab, Dept. Biology, University of Iowa</param.company>
+    <param.summary>Iowa FLI Tracker v3.0 -- Iowa Fly Locomotion and Interaction Tracker</param.summary>
+    <param.description>Iyengar A., Imoehl J., Ueda A., Nirschl J., Wu C.-F. (2012) "Automated Quantification of Locomotion, Social Interaction, and Mate Preference in Drosophila Mutants" J. Neurogenet. 26 (3-4) 306-316</param.description>
+    <param.screenshot>${PROJECT_ROOT}\ui_social_media_avatar_ffcd00.png</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\iowaFLI_Tracker_3_0\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo>${PROJECT_ROOT}\DomeWordPrimary BLACK.png</param.logo>
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\iowaFLI_Tracker_3_0</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages>
+      <item>&lt;package displayname="OS Generic Video Interface" enabled="true" name="OS Generic Video Interface" product="Image Acquisition Toolbox"/&gt;</item>
+    </param.support.packages>
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>IowaFLI_Tracker_v3_0_installer</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>false</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text />
+    <unset>
+      <param.guid />
+      <param.installpath.combo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.no.mcr.name />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+      <param.help.text />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0.m</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\IowaFLI_Tracker Defaults.txt</file>
+    </fileset.resources>
+    <fileset.package />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\AcquireVideo_v3_0.fig</file>
+      <file>${PROJECT_ROOT}\AcquireVideo_v3_0.m</file>
+      <file>${PROJECT_ROOT}\ChoiceSummarySheets.m</file>
+      <file>${PROJECT_ROOT}\getIowaFliDefaults.m</file>
+      <file>${PROJECT_ROOT}\Heatmap_gui.fig</file>
+      <file>${PROJECT_ROOT}\Heatmap_gui.m</file>
+      <file>${PROJECT_ROOT}\InteractionPlotGUIv2.fig</file>
+      <file>${PROJECT_ROOT}\InteractionPlotGUIv2.m</file>
+      <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0.fig</file>
+      <file>${PROJECT_ROOT}\KineticPlotGUI_v4.fig</file>
+      <file>${PROJECT_ROOT}\KineticPlotGUI_v4.m</file>
+      <file>${PROJECT_ROOT}\LastInfo.mat</file>
+      <file>${PROJECT_ROOT}\plotheatmap.m</file>
+      <file>${PROJECT_ROOT}\plottracksGUI_2.fig</file>
+      <file>${PROJECT_ROOT}\plottracksGUI_2.m</file>
+      <file>${PROJECT_ROOT}\ProxPlot.m</file>
+      <file>${PROJECT_ROOT}\ProxPlotPrev.m</file>
+      <file>${PROJECT_ROOT}\roi_define_v7.fig</file>
+      <file>${PROJECT_ROOT}\roi_define_v7.m</file>
+      <file>${PROJECT_ROOT}\sel_num_fly_gui_v4.fig</file>
+      <file>${PROJECT_ROOT}\sel_num_fly_gui_v4.m</file>
+      <file>${PROJECT_ROOT}\SummarySheetsV7noback.m</file>
+      <file>${PROJECT_ROOT}\thresh_v3.fig</file>
+      <file>${PROJECT_ROOT}\thresh_v3.m</file>
+      <file>${PROJECT_ROOT}\TrackVideo_v8b.m</file>
+      <file>${PROJECT_ROOT}\Video_FlyInfo.fig</file>
+      <file>${PROJECT_ROOT}\Video_FlyInfo.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_testing" name="iowaFLI_Tracker.exe" optional="false">R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0\iowaFLI_Tracker_3_0\for_testing\iowaFLI_Tracker.exe</file>
+      <file location="${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_testing" name="splash.png" optional="false">R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0\iowaFLI_Tracker_3_0\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\iowaFLI_Tracker_3_0\for_testing" name="readme.txt" optional="true">R:\BioDataLab\Atulya\atulyas m files\wuTRAC 3_0\IowaFLI_Tracker\IowaFLI Tracker 3_0\iowaFLI_Tracker_3_0\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2018b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.1</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

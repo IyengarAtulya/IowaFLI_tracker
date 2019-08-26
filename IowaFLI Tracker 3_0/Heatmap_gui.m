@@ -200,6 +200,7 @@ catch
 end
 if handles.firstFrameChk.Value==1
     imagesc(FirstFrame)
+    axis ij
 end
 
 SC(1,:)=Coordinates(1,:);
@@ -242,6 +243,7 @@ else
     Ad(find(vF==0))=0;
 end
 imagesc(vF','AlphaData',Ad');
+axis ij
 
 cmap=colormap(handles.availCmap{get(handles.popupmenu1,'Value')});
 cmap(1,:)=[ 1 1 1];

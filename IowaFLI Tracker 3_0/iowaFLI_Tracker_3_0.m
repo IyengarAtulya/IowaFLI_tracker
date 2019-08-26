@@ -884,7 +884,7 @@ SumType=questdlg('Choice or Kinetic Summary Sheets?','Summary Type','Choice','Ki
 if strcmp(SumType,'Choice')
     ChoiceSummarySheets(handles.wtfs,handles.wtfpaths);
 elseif strcmp(SumType,'Kinetic')
-    SummarySheetsV7(handles.wtfs,handles.wtfpaths);
+    SummarySheetsV7noback(handles.wtfs,handles.wtfpaths);
 end
 
 
@@ -910,13 +910,14 @@ end
 h=waitbar(0,'exporting to excel');
 for i=1:size(handles.wtfs,1);
     waitbar(i/size(handles.wtfs,1),h,['Exporting to Excel, #',num2str(i),' of ', num2str(size(handles.wtfs,1))]);
+    try
     load([handles.wtfpaths{i},handles.wtfs{i}],'-mat');
     [a b c]=fileparts(handles.wtfs{i});
     TGTFILENAME=[TGTFOLDER,'\',b,'.xlsx']
     if ~exist('WuTrackID')
         WuTrackID=nan;
     end
-    try
+   
         xlswrite(TGTFILENAME,{'WuTrack ID#',WuTrackID; 'FPS', FramesPerSecond;'nflies',NumberOfFlies;'Threshold', Threshold; 'Xs (mm/px)', Xscale; 'Ys (mm/px)', Yscale},1,'A1');
         headerline=cell(2,NumberOfFlies*2+1);
         for j=2:NumberOfFlies*2+1
@@ -933,7 +934,8 @@ for i=1:size(handles.wtfs,1);
         xlswrite(TGTFILENAME,FlyData,1,'C1')
         xlswrite(TGTFILENAME,Coordinates',1,'A9')
     catch
-        disp('error');
+        
+        warndlg('Error exporting file #',str2num(i));
         
     end
     
