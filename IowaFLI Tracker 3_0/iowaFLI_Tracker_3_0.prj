@@ -43,7 +43,14 @@
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
-    <param.help.text />
+    <param.help.text>Syntax 
+	 iowaFLI_Tracker_3_0 -? 
+	 iowaFLI_Tracker_3_0 varargin 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 varargin  input arguments 
+ Description 
+ 	 Iyengar A., Imoehl J., Ueda A., Nirschl J., Wu C.-F. (2012) "Automated Quantification of Locomotion, Social Interaction, and Mate Preference in Drosophila Mutants" J. Neurogenet. 26 (3-4) 306-316</param.help.text>
     <unset>
       <param.guid />
       <param.installpath.combo />
@@ -64,7 +71,6 @@
       <param.native.matlab />
       <param.checkbox />
       <param.example />
-      <param.help.text />
     </unset>
     <fileset.main>
       <file>${PROJECT_ROOT}\iowaFLI_Tracker_3_0.m</file>
@@ -109,7 +115,7 @@
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2018b</root>
+      <root>C:\Program Files\MATLAB\R2019a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
@@ -146,7 +152,7 @@
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>6.1</osver>
+      <osver>10.0</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>win64</arch>

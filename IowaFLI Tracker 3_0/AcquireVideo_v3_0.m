@@ -119,6 +119,11 @@ handles.InfoError = 1;
 
 handles.LastVideoPath = [pwd,'\Recorded Video'];
 handles.PATH=handles.LastVideoPath;
+if exist(handles.PATH)~=7
+   mkdir(handles.PATH); 
+else
+    
+end
 set(handles.save_txt,'String',handles.LastVideoPath);
 
 set(handles.save_to_btn,'Enable','on')
@@ -161,14 +166,14 @@ try
     if ~isempty(handles.temp_dev)
         %try
         for i=1:numel(handles.temp_dev)
-            availDev{i}=handles.temp_dev(i).ID
+            availDev{i}=handles.temp_dev(i).ID;
         end
-        handles.temp_Session=daq.createSession('ni')
+        handles.temp_Session=daq.createSession('ni');
         handles.temp_Session.addAnalogInputChannel('Dev2','ai0','Thermocouple')
         handles.temp_ch=handles.temp_Session.Channels(1);
         handles.temp_ch.ThermocoupleType='T';
         handles.temp_ch.Units='Celsius';
-        currtemp= handles.temp_Session.inputSingleScan
+        currtemp= handles.temp_Session.inputSingleScan;
         
         %  catch
         % end
@@ -177,8 +182,11 @@ try
     set(handles.InputChannel_menu,'Visible','off')
     set(handles.tempSampleRate_edit,'Visible','off')
     set(handles.TempComPort_menu,'Visible','off')
-    set(handles.temp_txt,'String',['initial temp: ',num2str(currtemp),' ^OC']);
+    set(handles.temp_txt,'String',['initial temp: ',num2str(currtemp),' C']);
     set(handles.curr_temp_btn,'Enable','on');
+catch
+    disp('No Temp Sensor Found');
+    handles.temp_dev='none';
 end
 
 
@@ -236,6 +244,11 @@ if ~isempty(handles.VidInfo)
     save([handles.PATH,'\',n,'.mat'],'VidInfo');
 end
 
+if isempty(handles.FILENAME)
+    handles.FILENAME =['test_',datestr(datetime,'yyyymmddHHMM'),'.mp4'];
+    handles.FILENAME_txt.String=handles.FILENAME;
+end
+guidata(hObject,handles);
 
 %%% Video Acquisition
 if get(handles.AqTypeSel_menu,'Value')==1
@@ -252,7 +265,7 @@ if get(handles.AqTypeSel_menu,'Value')==1
     try
         h1=waitbar(0,['Recorded Frames: ',num2str(handles.vid.DiskLoggerFrameCount)]);
     end
-    if isfield(handles,'temp_Session')
+    if strcmp(handles.temp_dev,'none')~=1
         ctemp=handles.temp_Session.inputSingleScan;
     else
         ctemp=nan;
@@ -272,23 +285,27 @@ if get(handles.AqTypeSel_menu,'Value')==1
 %                 handles.tempdat(end+1,1)=nan;
 %                 handles.tempdat(end,2)= nan;
 %             end
-            if isfield(handles,'temp_Session')
+            if strcmp(handles.temp_dev,'none')~=1
                 handles.tempdat(end+1,1)=handles.vid.DiskLoggerFrameCount;
                 handles.tempdat(end,2)=handles.temp_Session.inputSingleScan;
-                ct=handles.tempdat(end,2)
+                ct=handles.tempdat(end,2);
+                disp(['Current Temp = ',num2str(ct) ,' C'])
                 cd=datetime('now','Format','HH:mm:ss');
                 set(handles.temp_txt,'String',[num2str(ct,'%3.1f'), ' C  ',char(cd)]);
             else
-               handles.tempdat(eng+1,1)=nan;
+               handles.tempdat(end+1,1)=nan;
                handles.tempdat(end,2)= nan;
             end
+        catch
+             handles.tempdat(end+1,1)=nan;
+             handles.tempdat(end,2)= nan;
             
-
+        end
             waitbar(handles.vid.DiskLoggerFrameCount/handles.framestorecord,h1,['Recorded Frames: ',num2str(handles.vid.DiskLoggerFrameCount), '     Temp: ',num2str(handles.tempdat(end,2))]);
             
 %             pause(1/str2num(get(handles.tempSampleRate_edit,'String')))
             
-        end
+        
     end
     close(h1);
     
@@ -367,7 +384,7 @@ if get(handles.AqTypeSel_menu,'Value')==5
         end
         waitbar(dt/initialwait,h,['Record Countdown:' datestr(dt/86400,'HH:MM:SS')]);
     end
-    handles.PATH='M:\Lab\Scott Woods\Pupal Eclosion\Videos\';
+    
     C=strsplit(n,'_');
     C{end}=datestr(datetime,'yyyymmddHHMM');
     handles.FILENAME=[strjoin(C,'_'),'.mp4'];

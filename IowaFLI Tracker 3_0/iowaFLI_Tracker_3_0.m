@@ -26,7 +26,7 @@ function varargout = iowaFLI_Tracker_3_0(varargin)
 
 % Edit the above text to modify the response to help iowaFLI_Tracker_3_0
 
-% Last Modified by GUIDE v2.5 22-Aug-2019 15:28:56
+% Last Modified by GUIDE v2.5 27-Aug-2019 12:29:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -941,3 +941,37 @@ for i=1:size(handles.wtfs,1);
     
 end
 delete(h);
+
+
+% --------------------------------------------------------------------
+function expt_to_txt_menu_Callback(hObject, eventdata, handles)
+% hObject    handle to expt_to_txt_menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+PATH=uigetdir;
+if ~isnumeric(PATH)
+    for i=1: numel(handles.wtfs)
+        try
+            [p n e]=fileparts([handles.wtfpaths{i},handles.wtfs{i}]);
+            FILENAME=[PATH,'\',n,'.txt'];
+            load([handles.wtfpaths{i},handles.wtfs{i}],'-mat');
+            fid=fopen(FILENAME,'w+')
+            fprintf(fid,'%s %f %s %f %s %d %s','COORDINATES IN PIXELS, Xscale',Xscale,' px/mm Yscale', Yscale, 'px/mm FPS:', FramesPerSecond, ' Threshold: ');
+            if isstruct(Threshold)
+                fprintf(fid, '%f ', Threshold.thresh{1});
+            else
+                fprintf(fid,'%f ', Threshold);
+            end
+            fprintf(fid,'\r\n','\r\n');
+            for i=1:size(FlyData,1)
+                fprintf(fid,'%s \t',FlyData{i,:});
+                fprintf(fid,'\r\n','\r\n');
+            end
+            fclose(fid)
+            dlmwrite(FILENAME,Coordinates','Delimiter','\t','-append')
+        catch
+            warndlg('error with WTF#',num2str(i));
+        end
+    end
+    msgbox('Export to text complete');
+end
