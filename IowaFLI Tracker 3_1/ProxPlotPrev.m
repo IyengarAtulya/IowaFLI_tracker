@@ -1,4 +1,4 @@
-function abc=ProxPlotPrev(WTFFile, FramesPerPlot,ProximityRadius,input_axes,PlotEntireVideo,StartFrame,EndFrame,PlotSits,usecolors,varargin)
+function [abc,varargout]=ProxPlotPrev(WTFFile, FramesPerPlot,ProximityRadius,input_axes,PlotEntireVideo,StartFrame,EndFrame,PlotSits,usecolors,varargin)
 
 
 TwoFlies = 0;
@@ -242,5 +242,7 @@ abc(3,sum(isnan(PlotMatrix),2)>3000)=nan;
 abc(4,:)=sum(diff(((PlotMatrix(:,:)>0).*(PlotMatrix==round(PlotMatrix))),1,2)==1,2);
 abc(4,sum(isnan(PlotMatrix),2)>3000)=nan;
 
-abc=abc'
+varargout{1} = PlotMatrix;
+
+abc=abc';
 end

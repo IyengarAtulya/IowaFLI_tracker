@@ -54,10 +54,18 @@ function Heatmap_gui_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Heatmap_gui
 handles.output = hObject;
+if nargin > 3
+    handles.FILE=varargin{1};
+end
+if nargin == 3
+    [FILE PATH] = uigetfile('*.wtf');
+    handles.FILE = [PATH,FILE];
+end
+
 
 handles.availCmap=[{'parula'},{'jet'},{'hsv'},{'hot'}];
 set(handles.popupmenu1,'String',handles.availCmap);
-handles.FILE=varargin{1};
+
 load(handles.FILE,'-mat');
 set(handles.frame_min_edit,'String','1');
 set(handles.frame_max_edit,'String',size(Coordinates,2));
