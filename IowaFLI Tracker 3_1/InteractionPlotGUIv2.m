@@ -22,7 +22,7 @@ function varargout = InteractionPlotGUIv2(varargin)
 
 % Edit the above text to modify the response to help InteractionPlotGUIv2
 
-% Last Modified by GUIDE v2.5 10-Apr-2012 12:27:48
+% Last Modified by GUIDE v2.5 12-Jul-2021 09:52:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -233,7 +233,27 @@ function preview_btn_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 cla(handles.axes1,'reset');
 index_selected = min(get(handles.wtf_list,'Value'));
-ProxPlotPrev([handles.wtfpaths{index_selected},handles.wtfs{index_selected}],str2double(get(handles.interval_size_edit,'String')),(str2double(get(handles.prox_radius_edit,'String'))),handles.axes1,get(handles.plot_entire_video_chk,'Value'),str2double(get(handles.start_frame_edit,'String')),str2double(get(handles.stop_frame_edit,'String')),get(handles.Plot_Sits_chk,'Value'),get(handles.dont_use_colors_chk,'value'));
+if handles.new_fig_chk.Value ==1
+    hh = figure;
+    [handles.currentstats, handles.currentPlotMatrix] = ProxPlotPrev([handles.wtfpaths{index_selected},handles.wtfs{index_selected}],str2double(get(handles.interval_size_edit,'String')),(str2double(get(handles.prox_radius_edit,'String'))),gca,get(handles.plot_entire_video_chk,'Value'),str2double(get(handles.start_frame_edit,'String')),str2double(get(handles.stop_frame_edit,'String')),get(handles.Plot_Sits_chk,'Value'),get(handles.dont_use_colors_chk,'value'));
+else
+    [handles.currentstats, handles.currentPlotMatrix] = ProxPlotPrev([handles.wtfpaths{index_selected},handles.wtfs{index_selected}],str2double(get(handles.interval_size_edit,'String')),(str2double(get(handles.prox_radius_edit,'String'))),handles.axes1,get(handles.plot_entire_video_chk,'Value'),str2double(get(handles.start_frame_edit,'String')),str2double(get(handles.stop_frame_edit,'String')),get(handles.Plot_Sits_chk,'Value'),get(handles.dont_use_colors_chk,'value'));
+end
+ExpAns = questdlg('Export To Workspace/Excel/Text?','Export Data','Workspace','Excel','Cancel','Cancel');
+switch ExpAns
+    case 'Workspace'
+        export2wsdlg({'Overall Statistics','Interaction Matrix'},{'intStats','intMat'},{handles.currentstats,handles.currentPlotMatrix});
+    case 'Excel'
+        [wFile, wPath] = uiputfile('*.xlsx');
+        writematrix([[1:15]',handles.currentstats,nan(15,5),[1:15]',handles.currentPlotMatrix],[wPath,wFile],'Range','A4');
+        try
+        xlswrite([wPath,wFile],[{'Fly#'},{ 'IntTime'},{'non-sit IntTime'},{ 'num Int'},{'num non-sit Int'},{[]},{ []},{ []},{ []},{ []},{'Fly#'},{'Int Matrix (-1 = no interactions,+0.75 = sit)'}],1,'A3');
+        end
+end
+
+guidata(hObject,handles);
+
+
 
 % --- Executes on button press in export_sel_btn.
 function export_sel_btn_Callback(hObject, eventdata, handles)
@@ -548,3 +568,12 @@ function pushbutton7_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in new_fig_chk.
+function new_fig_chk_Callback(hObject, eventdata, handles)
+% hObject    handle to new_fig_chk (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of new_fig_chk
